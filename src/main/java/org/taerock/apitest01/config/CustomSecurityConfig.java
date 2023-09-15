@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -53,7 +54,9 @@ public class CustomSecurityConfig {
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .csrf((csrf) -> csrf.disable());
+                .csrf((csrf) -> csrf.disable())
+                // 세션 생성 만들기 옵션 막기
+                .sessionManagement(ssm -> ssm.sessionCreationPolicy(SessionCreationPolicy.NEVER));
         return http.build();
     }
 
