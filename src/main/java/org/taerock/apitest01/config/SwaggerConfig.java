@@ -59,5 +59,4 @@ public class SwaggerConfig {
                 .description("Rest API Test");
     }
 
-
 }
